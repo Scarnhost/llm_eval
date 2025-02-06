@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - login.env
+    volumes:
+      - postdb_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+
+  res_api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: rest_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - model
+
+  model:
+    build:
+      context: .
+      dockerfile: Dockerfile.model
+    container_name: model_call
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: streamlit_frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - res_api
+
+volumes:
+  postdb_data:
