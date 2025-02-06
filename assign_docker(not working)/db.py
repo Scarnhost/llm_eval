@@ -1,9 +1,6 @@
 import psycopg2
 import pandas as pd
 import os
-from dotenv import load_dotenv
-
-load_dotenv("D:/Trustwise/docker/login.env") #enter the entire path if running this code on windows.
 
 #postgres login data
 conn = psycopg2.connect(
