@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+plotly
+pandas
+streamlit
+transformers
+torch
+psycopg2
+pandas
+python-dotenv
